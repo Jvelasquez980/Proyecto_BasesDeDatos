@@ -1,0 +1,85 @@
+{% extends "layout1.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center mt-5 mb-5">GESTION DE PODAS</h1>
+    </div>
+
+    <div class="container">
+        <div class="row row-col-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-center">Añadir Una Poda</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="/databs/poda/add" method="POST">
+                            <label>Ultima Fecha</label>
+                            <input type="date" class="form-control mb-3" name="UltP">
+                            <label>Proxima Fecha</label>
+                            <input type="date" class="form-control mb-3" name="ProP">
+                            <label>Herramientas Usadas</label>
+                            <input type="text" class="form-control mb-3" name="Herramientas">
+                            <label>Id Agricultor</label>
+                            <input type="number" class="form-control mb-3" name="cc">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-center">Podas</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <div class="row row-col-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
+                                {% for poda in podas %}
+
+                                    <div class="col">
+                                        <li class="list-group-item mb-3">
+                                            <form action="/databs/poda/ed/{{ poda._id }}/" method="POST">
+                                                <small>Ultima Poda</small>
+                                                <input type="date" class="form-control" value="{{poda.UltimaF}}" name="UltP">
+                                                <small>Proxima Poda</small>
+                                                <input type="date" class="form-control" value="{{poda.ProximaF}}" name="ProP">
+                                                <small>Herramientas</small>
+                                                <input type="text" class="form-control" value="{{poda.Herramientas}}" name="Herramientas">
+                                                <small>Id Agricultor</small>
+                                                <input type="number" class="form-control" value="{{poda.AgricultorE._id}}" name="cc">
+                                                <small>Nombre Agricultor</small>
+                                                <input type="text" class="form-control" value="{{poda.AgricultorE.Nombre}}" name="Nombre" readonly>
+                                                <small>Apellido Agricultor</small>
+                                                <input type="text" class="form-control" value="{{poda.AgricultorE.Apellido}}" name="Apellido" readonly>
+                                                <button class="btn btn-primary btn-sm mt-3" type="submit">Editar</button>
+                                                <a href="/databs/poda/delete/{{ poda._id }}/" class="btn btn-danger btn-sm mt-3">Eliminar</a>
+
+                                            </form>
+                                        </li>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                        </ul>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+{% endblock%}

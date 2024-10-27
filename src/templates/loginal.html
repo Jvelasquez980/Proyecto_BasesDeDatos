@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error</strong>, tu correo o tu contraseña son incorrectos, verifica e intenta de nuevo.
+  </div>
+<div class="card">
+    <div class="card-header">
+        Iniciar Sesion
+    </div>
+    <div class="card-body">
+        <form action="/login/iniciar" method="POST">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <input type="email" name="Correo" class="form-control" />
+                <label class="form-label" for="form2Example1">Correo</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <input type="password" name="Contraseña" class="form-control" />
+                <label class="form-label" for="form2Example2">Contraseña</label>
+            </div>
+
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4">
+                
+            </div>
+
+            <!-- Submit button -->
+            <div class="row">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Confirmar</button>
+                </div>
+              </div>
+
+            <!-- Register buttons -->
+            <div class="text-center">
+                <p>No tienes cuenta? <a href="/signup">Registrate</a></p>
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock%}

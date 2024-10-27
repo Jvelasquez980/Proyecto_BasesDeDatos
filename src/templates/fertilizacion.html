@@ -1,0 +1,96 @@
+{% extends "layout1.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center mt-5 mb-5">GESTION DE FECHAS DE FERTILIZACION</h1>
+    </div>
+
+    <div class="container">
+        <div class="row row-col-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-center">Añadir una fecha de Fertilizacion</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="/databs/fertilizacion/add" method="POST">
+                            <label>Id (Fertilizante)</label>
+                            <input type="number" class="form-control mb-3" name="Id">
+                            <label>Cantidad (KG)</label>
+                            <input type="number" class="form-control mb-3" name="Cantidad">
+                            <label>Precio (COP)</label>
+                            <input type="number" class="form-control mb-3" name="Precio">
+                            <label>Id Agricultor</label>
+                            <input type="number" class="form-control mb-3" name="cc">
+                            <label>Ultima Fertilizacion</label>
+                            <input type="date" class="form-control mb-3" name="Ult">
+                            <label>Proxima Fertilizacion</label>
+                            <input type="date" class="form-control mb-3" name="Pro">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-center">Fertilizaciones</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <div class="row row-col-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
+                                {% for fer in fert %}
+
+                                    <div class="col">
+                                        <li class="list-group-item mb-3">
+                                            <form action="/databs/fertilizacion/{{fer._id}}" method="POST">
+                                                <small>Id</small>
+                                                <input type="number" class="form-control" value="{{fer.idF}}" name="Id">
+                                                <small>Cantidad (KG)</small>
+                                                <input type="number" class="form-control" value="{{fer.Cantidad}}" name="Cantidad">
+                                                <small>Precio (COP)</small>
+                                                <input type="number" class="form-control" value="{{fer.Precio}}" name="Precio">
+                                                <small>Precio por Cantidad Usada</small>
+                                                <input type="number" class="form-control" value="{{fer.CantPrecio}}" name="price" readonly>
+                                                <small>Id Agricultor</small>
+                                                <input type="number" class="form-control" value="{{fer.Agricultor._id}}" name="cc" >
+                                                <small>Nombre del Agricultor</small>
+                                                <input type="text" class="form-control" value="{{fer.Agricultor.Nombre}}" name="Nombre" readonly>
+                                                <small>Apellido del Agricultor</small>
+                                                <input type="text" class="form-control" value="{{fer.Agricultor.Apellido}}" name="Apellido" readonly>
+                                                <small>Ultima Fertilizacion</small>
+                                                <input type="date" class="form-control" value="{{fer.UltimaF}}" name="Ult">
+                                                <small>Proxima Fertilizacion</small>
+                                                <input type="date" class="form-control" value="{{fer.ProximaF}}" name="Pro">
+                                                <button class="btn btn-primary btn-sm mt-3" type="submit">Editar</button>
+                                                <a href="/databs/fertilizacion/delete/{{ fer._id }}/" class="btn btn-danger btn-sm mt-3">Eliminar</a>
+
+                                            </form>
+                                        </li>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                        </ul>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+{% endblock%}

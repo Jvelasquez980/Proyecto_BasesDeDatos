@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        Crear Cuenta
+    </div>
+    <div class="card-body">
+        <form action="/signup/crear" method="POST">
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example1">Nombre</label>
+                <input type="text" name="Nombre" class="form-control" />
+                
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example1">Apellido</label>
+                <input type="text" name="Apellido" class="form-control" />
+                
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example1">Correo</label>
+                <input type="email" name="Correo" class="form-control" />
+                
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example1">Contraseña</label>
+                <input type="password" name="Contraseña" class="form-control" />
+                
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example2">Confirmar Contraseña</label>
+                <input type="password" name="coo" class="form-control" />
+                
+            </div>
+
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4">
+                <div class="col d-flex justify-content-center">
+                    
+            </div>
+
+            <!-- Submit button -->
+            <div class="row">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Confirmar</button>
+                </div>
+              </div>
+            
+
+            <!-- Register buttons -->
+            <div class="text-center">
+                <p>Ya estas registrado? <a href="/login">Inicia Sesion</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock%}

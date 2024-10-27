@@ -1,0 +1,84 @@
+{% extends "layout1.html" %}
+
+{% block content %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error</strong>, no puedes editar la cedula de un agricultor.
+  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center mt-5 mb-5">GESTION DE AGRICULTORES</h1>
+    </div>
+
+    <div class="container">
+        <div class="row row-col-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-center">AÑADIR UN NUEVO AGRICULTOR</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="/databs/agricultores/add" method="POST">
+                            <label>Nombre</label>
+                            <input type="text" class="form-control mb-3" name="Nombre">
+                            <label>Apellido</label>
+                            <input type="text" class="form-control mb-3" name="Apellido">
+                            <label>Cedula</label>
+                            <input type="number" class="form-control mb-3" name="Cedula">
+                            <label>Salario</label>
+                            <input type="number" class="form-control mb-3" name="Salario">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-center">Listado de Agricultores</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <div class="row row-col-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
+                                {% for agrs in agr %}
+
+                                    <div class="col">
+                                        <li class="list-group-item mb-3">
+                                            <form action="/databs/agricultores/ed/{{ agrs._id }}/" method="POST">
+                                                <small>Cedula (NO EDITABLE)</small>
+                                                <input type="number" class="form-control" value="{{agrs._id}}" name="Cedula" readonly>
+                                                <small>Nombre</small>
+                                                <input type="text" class="form-control" value="{{agrs.Nombre}}" name="Nombre">
+                                                <small>Apellido</small>
+                                                <input type="text" class="form-control" value="{{agrs.Apellido}}" name="Apellido">
+                                                <small>Salario</small>
+                                                <input type="number" class="form-control" value="{{agrs.Salario}}" name="Salario">
+                                                <button class="btn btn-primary btn-sm mt-3" type="submit">Editar</button>
+                                                <a href="/databs/agricultores/delete/{{ agrs._id }}/" class="btn btn-danger btn-sm mt-3">Eliminar</a>
+
+                                            </form>
+                                        </li>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                        </ul>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+{% endblock%}

@@ -1,0 +1,95 @@
+{% extends "layout1.html" %}
+
+{% block content %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error</strong>, tienes errores en los datos, como campos vacios o el id del agricultor no se encuentra en la coleccion agricultores, verificalos.
+  </div>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+  
+  </head>
+  <body>
+  
+      <div class="container">
+          <h1 class="text-center mt-5 mb-5">AQUI PUEDES GESTIONAR LOS RIEGOS</h1>
+      </div>
+  
+      <div class="container">
+          <div class="row row-col-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
+              <div class="col-md-6 mb-3">
+                  <div class="card">
+                      <div class="card-header">
+                          <h5 class="text-center">AÑADIR UN RIEGO</h5>
+                      </div>
+                      <div class="card-body">
+                          <form action="/databs/riego/add" method="POST">
+                              <label>Hora De Inicio</label>
+                              <input type="time" class="form-control mb-3" name="Horai">
+                              <label>Hora Al Finalizar</label>
+                              <input type="time" class="form-control mb-3" name="Horaf">
+                              <label>FECHA</label>
+                              <input type="date" class="form-control mb-3" name="Ult">
+                              <label>Fecha Proxima Programada</label>
+                              <input type="date" class="form-control mb-3" name="Pro">
+                              <label>Id del Agricultor Encargado</label>
+                              <input type="number" class="form-control mb-3" name="cc">
+                              <button class="btn btn-primary" type="submit">Guardar</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="col-md-6">
+                  <div class="card">
+                      <div class="card-header">
+                          <h5 class="text-center">RIEGOS</h5>
+                      </div>
+                      <div class="card-body">
+                          <ul class="list-group">
+                              <div class="row row-col-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
+                                  {% for rg in rgs %}
+  
+                                      <div class="col">
+                                          <li class="list-group-item mb-3">
+                                              <form action="/databs/riego/ed/{{rg._id}}" method="POST">
+                                                  <small>Hora Inicial</small>
+                                                  <input type="time" class="form-control" value="{{rg.HoraI}}" name="Horai">
+                                                  <small>Hora Final</small>
+                                                  <input type="time" class="form-control" value="{{rg.HoraF}}" name="Horaf">
+                                                  <small>Horas Totales de Riego</small>
+                                                  <input type="text" class="form-control" value="{{rg.Horas}}" name="price" readonly>
+                                                  <small>Fecha</small>
+                                                  <input type="date" class="form-control" value="{{rg.UltimaF}}" name="Ult">
+                                                  <small>Proxima Fecha Programada</small>
+                                                  <input type="date" class="form-control" value="{{rg.ProximaF}}" name="Pro">
+                                                  <small>Id del Agricultor Encargado</small>
+                                                  <input type="number" class="form-control" value="{{rg.Agricultor._id}}" name="cc">
+                                                  <small>Nombre del Agricultor Encargado</small>
+                                                  <input type="text" class="form-control" value="{{rg.Agricultor.Nombre}}" name="Nombre" readonly>
+                                                  <small>Apellido del Agricultor Encargado</small>
+                                                  <input type="text" class="form-control" value="{{rg.Agricultor.Apellido}}" name="Apellido" readonly>
+                                                  <button class="btn btn-primary btn-sm mt-3" type="submit">Editar</button>
+                                                  <a href="/databs/riego/delete/{{ rg._id }}/" class="btn btn-danger btn-sm mt-3">Eliminar</a>
+  
+                                              </form>
+                                          </li>
+                                      </div>
+  
+                                  {% endfor %}
+                              </div>
+                          </ul>
+                      </div> 
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+  </body>
+  </html>
+  {% endblock%}
+  
